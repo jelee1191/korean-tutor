@@ -108,4 +108,5 @@ export interface GrammarProgress {
   timesIncorrect: number
   completed: boolean            // Has the lesson been read?
   lastAttemptDate?: Date
+  lessonAccuracy?: number       // Overall lesson accuracy percentage (0-100) for completed lessons
 }

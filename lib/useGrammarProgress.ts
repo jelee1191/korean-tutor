@@ -9,6 +9,8 @@ import {
   markLessonComplete as markLessonCompleteStorage,
   getExercisesForReview,
   clearAllGrammarProgress,
+  getLessonStars as getLessonStarsStorage,
+  getStarStats as getStarStatsStorage,
 } from './grammarStorage'
 import { useAuth } from './AuthContext'
 
@@ -61,10 +63,10 @@ export const useGrammarProgress = () => {
     })
   }, [user])
 
-  const markLessonComplete = useCallback(async (lessonId: string) => {
+  const markLessonComplete = useCallback(async (lessonId: string, accuracy: number) => {
     const key = `lesson:${lessonId}`
     setProgress(prev => {
-      const updated = markLessonCompleteStorage(lessonId, prev[key])
+      const updated = markLessonCompleteStorage(lessonId, accuracy, prev[key])
       const newProgress = { ...prev, [key]: updated }
 
       // TODO: Save to Supabase if user is logged in
@@ -122,6 +124,14 @@ export const useGrammarProgress = () => {
     setProgress({})
   }, [])
 
+  const getLessonStars = useCallback((lessonId: string): number => {
+    return getLessonStarsStorage(lessonId, progress)
+  }, [progress])
+
+  const getStarStats = useCallback((totalLessons: number) => {
+    return getStarStatsStorage(progress, totalLessons)
+  }, [progress])
+
   return {
     progress,
     isLoaded,
@@ -132,5 +142,7 @@ export const useGrammarProgress = () => {
     getDueExercises,
     getGrammarStats,
     resetProgress,
+    getLessonStars,
+    getStarStats,
   }
 }

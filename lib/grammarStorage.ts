@@ -85,6 +85,7 @@ export const updateExerciseProgress = (
 
 export const markLessonComplete = (
   lessonId: string,
+  accuracy: number,
   currentProgress?: GrammarProgress
 ): GrammarProgress => {
   const now = new Date()
@@ -97,7 +98,8 @@ export const markLessonComplete = (
     timesCorrect: currentProgress?.timesCorrect || 0,
     timesIncorrect: currentProgress?.timesIncorrect || 0,
     completed: true,
-    lastAttemptDate: now
+    lastAttemptDate: now,
+    lessonAccuracy: Math.round(accuracy)
   }
 }
 
@@ -130,4 +132,45 @@ export const clearAllGrammarProgress = (): void => {
   if (!storage) return
 
   storage.removeItem(STORAGE_KEY)
+}
+
+/**
+ * Get number of stars for a lesson
+ * 0 stars: not completed
+ * 1 star: completed with < 100% accuracy
+ * 3 stars: completed with 100% accuracy
+ */
+export const getLessonStars = (lessonId: string, progress: Record<string, GrammarProgress>): number => {
+  const lessonProgress = progress[lessonId]
+
+  if (!lessonProgress || !lessonProgress.completed) {
+    return 0
+  }
+
+  if (lessonProgress.lessonAccuracy === 100) {
+    return 3
+  }
+
+  return 1
+}
+
+/**
+ * Get overall star statistics
+ */
+export const getStarStats = (progress: Record<string, GrammarProgress>, totalLessons: number) => {
+  const completedLessons = Object.values(progress).filter(p => p.completed && !p.exerciseId)
+
+  const totalStars = completedLessons.reduce((sum, lesson) => {
+    if (lesson.lessonAccuracy === 100) return sum + 3
+    return sum + 1
+  }, 0)
+
+  const threeStars = completedLessons.filter(lesson => lesson.lessonAccuracy === 100).length
+
+  return {
+    totalStars,
+    maxStars: totalLessons,
+    threeStars,
+    maxThreeStars: totalLessons
+  }
 }

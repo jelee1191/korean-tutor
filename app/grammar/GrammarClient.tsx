@@ -9,7 +9,7 @@ interface GrammarClientProps {
 }
 
 export default function GrammarClient({ lessons }: GrammarClientProps) {
-  const { isLoaded, isLessonCompleted, getGrammarStats } = useGrammarProgress()
+  const { isLoaded, getLessonStars, getStarStats, getGrammarStats } = useGrammarProgress()
 
   if (!isLoaded) {
     return (
@@ -20,6 +20,7 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
   }
 
   const stats = getGrammarStats()
+  const starStats = getStarStats(lessons.length)
 
   // Group lessons by chapter
   const lessonsByChapter = lessons.reduce((acc, lesson) => {
@@ -41,6 +42,30 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
           <p className="text-xl text-gray-600">
             Master Korean step by step
           </p>
+        </div>
+
+        {/* Star Stats */}
+        <div className="grid grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-yellow-200">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-4xl">⭐</span>
+              <div className="text-4xl font-black text-yellow-600">
+                {starStats.totalStars}
+              </div>
+              <span className="text-2xl text-gray-400 font-bold">/ {starStats.maxStars}</span>
+            </div>
+            <div className="text-gray-600 text-center font-medium">Stars Earned</div>
+          </div>
+          <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-300">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-4xl">⭐⭐⭐</span>
+              <div className="text-4xl font-black text-amber-600">
+                {starStats.threeStars}
+              </div>
+              <span className="text-2xl text-gray-400 font-bold">/ {starStats.maxThreeStars}</span>
+            </div>
+            <div className="text-gray-600 text-center font-medium">Perfect Lessons</div>
+          </div>
         </div>
 
         {/* Due for Review */}
@@ -72,7 +97,7 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {chapterLessons.map((lesson) => {
-                  const completed = isLessonCompleted(lesson.id)
+                  const stars = getLessonStars(lesson.id)
 
                   return (
                     <Link
@@ -83,14 +108,14 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
+                            {stars > 0 && (
+                              <span className="text-xl">
+                                {stars === 3 ? '⭐⭐⭐' : '⭐'}
+                              </span>
+                            )}
                             <h3 className="text-xl font-bold text-gray-900">
                               Lesson {lesson.order}: {lesson.title}
                             </h3>
-                            {completed && (
-                              <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                                ✓
-                              </span>
-                            )}
                           </div>
                           <p className="text-gray-600 text-lg mb-2">{lesson.titleKorean}</p>
                           <p className="text-gray-500 text-sm">{lesson.description}</p>

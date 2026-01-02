@@ -26,8 +26,13 @@ export default function PracticeClient({ lesson, exercises }: PracticeClientProp
   }
 
   const handleComplete = async (stats: { correct: number; total: number }) => {
-    // Auto-mark lesson as complete when all exercises are done
-    await markLessonComplete(lesson.id)
+    // Calculate accuracy percentage
+    const accuracy = stats.total > 0
+      ? (stats.correct / stats.total) * 100
+      : 0
+
+    // Auto-mark lesson as complete when all exercises are done with accuracy
+    await markLessonComplete(lesson.id, accuracy)
 
     setSessionStats(stats)
     setSessionComplete(true)
