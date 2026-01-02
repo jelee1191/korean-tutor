@@ -38,9 +38,9 @@ export default function DashboardClient({ totalVocabulary }: DashboardClientProp
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-500"></div>
           <div className="relative text-white">
             <div className="text-5xl mb-3">📚</div>
-            <h3 className="text-2xl font-black mb-2">Practice</h3>
+            <h3 className="text-2xl font-black mb-2">Flashcards</h3>
             <p className="text-sm text-purple-100 font-medium">
-              Practice vocabulary
+              Practice flashcards
             </p>
             <div className="mt-4 inline-flex items-center gap-2 text-white font-semibold text-sm">
               Start
@@ -58,9 +58,9 @@ export default function DashboardClient({ totalVocabulary }: DashboardClientProp
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-500"></div>
           <div className="relative text-white">
             <div className="text-5xl mb-3">✏️</div>
-            <h3 className="text-2xl font-black mb-2">Grammar</h3>
+            <h3 className="text-2xl font-black mb-2">Lessons</h3>
             <p className="text-sm text-green-100 font-medium">
-              Learn Korean grammar
+              Learn Korean lessons
             </p>
             <div className="mt-4 inline-flex items-center gap-2 text-white font-semibold text-sm">
               Learn
@@ -78,9 +78,9 @@ export default function DashboardClient({ totalVocabulary }: DashboardClientProp
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-500"></div>
           <div className="relative text-white">
             <div className="text-5xl mb-3">📖</div>
-            <h3 className="text-2xl font-black mb-2">Words</h3>
+            <h3 className="text-2xl font-black mb-2">Vocab</h3>
             <p className="text-sm text-blue-100 font-medium">
-              Explore {totalVocabulary} words
+              Explore {totalVocabulary} vocab
             </p>
             <div className="mt-4 inline-flex items-center gap-2 text-white font-semibold text-sm">
               Browse

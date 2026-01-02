@@ -36,10 +36,10 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-black text-gray-900 mb-4">
-            Grammar Lessons
+            Lessons
           </h1>
           <p className="text-xl text-gray-600">
-            Master Korean grammar step by step
+            Master Korean step by step
           </p>
         </div>
 

@@ -62,10 +62,10 @@ export default function WordsClient({ vocabulary, categories }: WordsClientProps
           </div>
           <div>
             <h1 className="text-4xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Word Bank
+              Vocab Bank
             </h1>
             <p className="text-gray-600 font-medium">
-              Browse all {vocabulary.length} vocabulary words
+              Browse all {vocabulary.length} vocab
             </p>
           </div>
         </div>

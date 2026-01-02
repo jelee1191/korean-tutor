@@ -129,14 +129,14 @@ export default function PracticeClient({ vocabulary }: PracticeClientProps) {
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            Practice Session
+            Flashcard Session
           </h2>
           <div className="text-right">
             <div className="text-3xl font-black text-gray-900">
               {currentIndex + 1}
               <span className="text-gray-400 text-2xl"> / {sessionWords.length}</span>
             </div>
-            <div className="text-sm text-gray-500 font-medium">Words Completed</div>
+            <div className="text-sm text-gray-500 font-medium">Cards Completed</div>
           </div>
         </div>
 
