@@ -33,9 +33,6 @@ export default function Dashboard() {
         <h1 className="text-6xl font-black mb-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
           한국어 학습
         </h1>
-        <p className="text-2xl text-gray-600 font-light">
-          Master Korean vocabulary with smart repetition
-        </p>
       </div>
 
       {/* Stats Grid */}
