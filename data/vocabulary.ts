@@ -1,697 +1,244 @@
-import { Word } from '@/types'
+import { Word, Chapter } from '@/types'
 
-export const vocabulary: Word[] = [
-  // Greetings (10 words)
-  {
-    id: 'greet-01',
-    korean: '안녕하세요',
-    english: 'hello (formal)',
-    category: 'greetings',
-    notes: 'Most common formal greeting'
-  },
-  {
-    id: 'greet-02',
-    korean: '안녕',
-    english: 'hi (casual)',
-    category: 'greetings',
-    notes: 'Use with friends or younger people'
-  },
-  {
-    id: 'greet-03',
-    korean: '안녕히 가세요',
-    english: 'goodbye (to someone leaving)',
-    category: 'greetings',
-    notes: 'Said by person staying'
-  },
-  {
-    id: 'greet-04',
-    korean: '안녕히 계세요',
-    english: 'goodbye (when you are leaving)',
-    category: 'greetings',
-    notes: 'Said by person leaving'
-  },
-  {
-    id: 'greet-05',
-    korean: '감사합니다',
-    english: 'thank you (formal)',
-    category: 'greetings',
-    notes: 'Polite thank you'
-  },
-  {
-    id: 'greet-06',
-    korean: '고맙습니다',
-    english: 'thank you',
-    category: 'greetings',
-    notes: 'Slightly less formal than 감사합니다'
-  },
-  {
-    id: 'greet-07',
-    korean: '죄송합니다',
-    english: 'I\'m sorry (formal)',
-    category: 'greetings',
-    notes: 'Apologizing formally'
-  },
-  {
-    id: 'greet-08',
-    korean: '미안해요',
-    english: 'I\'m sorry',
-    category: 'greetings',
-    notes: 'Casual apology'
-  },
-  {
-    id: 'greet-09',
-    korean: '환영합니다',
-    english: 'welcome',
-    category: 'greetings',
-    notes: 'Welcoming someone'
-  },
-  {
-    id: 'greet-10',
-    korean: '잘 지냈어요?',
-    english: 'how have you been?',
-    category: 'greetings',
-    notes: 'Asking about someone\'s wellbeing'
-  },
-
-  // Numbers (10 words) - Native Korean numbers 1-10
-  {
-    id: 'num-01',
-    korean: '하나',
-    english: 'one',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-02',
-    korean: '둘',
-    english: 'two',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-03',
-    korean: '셋',
-    english: 'three',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-04',
-    korean: '넷',
-    english: 'four',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-05',
-    korean: '다섯',
-    english: 'five',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-06',
-    korean: '여섯',
-    english: 'six',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-07',
-    korean: '일곱',
-    english: 'seven',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-08',
-    korean: '여덟',
-    english: 'eight',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-09',
-    korean: '아홉',
-    english: 'nine',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-  {
-    id: 'num-10',
-    korean: '열',
-    english: 'ten',
-    category: 'numbers',
-    notes: 'Native Korean number'
-  },
-
-  // Food (15 words)
-  {
-    id: 'food-01',
-    korean: '밥',
-    english: 'rice, meal',
-    category: 'food',
-    notes: 'Can mean cooked rice or meal in general'
-  },
-  {
-    id: 'food-02',
-    korean: '물',
-    english: 'water',
-    category: 'food'
-  },
-  {
-    id: 'food-03',
-    korean: '김치',
-    english: 'kimchi',
-    category: 'food',
-    notes: 'Traditional fermented vegetables'
-  },
-  {
-    id: 'food-04',
-    korean: '고기',
-    english: 'meat',
-    category: 'food'
-  },
-  {
-    id: 'food-05',
-    korean: '야채',
-    english: 'vegetables',
-    category: 'food'
-  },
-  {
-    id: 'food-06',
-    korean: '과일',
-    english: 'fruit',
-    category: 'food'
-  },
-  {
-    id: 'food-07',
-    korean: '빵',
-    english: 'bread',
-    category: 'food'
-  },
-  {
-    id: 'food-08',
-    korean: '우유',
-    english: 'milk',
-    category: 'food'
-  },
-  {
-    id: 'food-09',
-    korean: '커피',
-    english: 'coffee',
-    category: 'food'
-  },
-  {
-    id: 'food-10',
-    korean: '차',
-    english: 'tea',
-    category: 'food'
-  },
-  {
-    id: 'food-11',
-    korean: '맥주',
-    english: 'beer',
-    category: 'food'
-  },
-  {
-    id: 'food-12',
-    korean: '소주',
-    english: 'soju',
-    category: 'food',
-    notes: 'Traditional Korean liquor'
-  },
-  {
-    id: 'food-13',
-    korean: '국',
-    english: 'soup',
-    category: 'food'
-  },
-  {
-    id: 'food-14',
-    korean: '라면',
-    english: 'ramen, instant noodles',
-    category: 'food'
-  },
-  {
-    id: 'food-15',
-    korean: '치킨',
-    english: 'fried chicken',
-    category: 'food',
-    notes: 'Very popular Korean-style fried chicken'
-  },
-
-  // Common Verbs (15 words)
-  {
-    id: 'verb-01',
-    korean: '가다',
-    english: 'to go',
-    category: 'verbs',
-    notes: 'Dictionary form'
-  },
-  {
-    id: 'verb-02',
-    korean: '오다',
-    english: 'to come',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-03',
-    korean: '먹다',
-    english: 'to eat',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-04',
-    korean: '마시다',
-    english: 'to drink',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-05',
-    korean: '자다',
-    english: 'to sleep',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-06',
-    korean: '일어나다',
-    english: 'to wake up, get up',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-07',
-    korean: '보다',
-    english: 'to see, watch',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-08',
-    korean: '듣다',
-    english: 'to hear, listen',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-09',
-    korean: '말하다',
-    english: 'to speak, say',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-10',
-    korean: '읽다',
-    english: 'to read',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-11',
-    korean: '쓰다',
-    english: 'to write',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-12',
-    korean: '공부하다',
-    english: 'to study',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-13',
-    korean: '일하다',
-    english: 'to work',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-14',
-    korean: '살다',
-    english: 'to live',
-    category: 'verbs'
-  },
-  {
-    id: 'verb-15',
-    korean: '사랑하다',
-    english: 'to love',
-    category: 'verbs'
-  },
-
-  // Adjectives (10 words)
-  {
-    id: 'adj-01',
-    korean: '좋다',
-    english: 'to be good',
-    category: 'adjectives',
-    notes: 'Korean adjectives are conjugated like verbs'
-  },
-  {
-    id: 'adj-02',
-    korean: '나쁘다',
-    english: 'to be bad',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-03',
-    korean: '크다',
-    english: 'to be big',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-04',
-    korean: '작다',
-    english: 'to be small',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-05',
-    korean: '많다',
-    english: 'to be many, much',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-06',
-    korean: '적다',
-    english: 'to be few, little',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-07',
-    korean: '예쁘다',
-    english: 'to be pretty',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-08',
-    korean: '잘생기다',
-    english: 'to be handsome',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-09',
-    korean: '재미있다',
-    english: 'to be fun, interesting',
-    category: 'adjectives'
-  },
-  {
-    id: 'adj-10',
-    korean: '어렵다',
-    english: 'to be difficult',
-    category: 'adjectives'
-  },
-
-  // Family (10 words)
-  {
-    id: 'fam-01',
-    korean: '가족',
-    english: 'family',
-    category: 'family'
-  },
-  {
-    id: 'fam-02',
-    korean: '어머니',
-    english: 'mother (formal)',
-    category: 'family'
-  },
-  {
-    id: 'fam-03',
-    korean: '아버지',
-    english: 'father (formal)',
-    category: 'family'
-  },
-  {
-    id: 'fam-04',
-    korean: '엄마',
-    english: 'mom',
-    category: 'family',
-    notes: 'Casual form'
-  },
-  {
-    id: 'fam-05',
-    korean: '아빠',
-    english: 'dad',
-    category: 'family',
-    notes: 'Casual form'
-  },
-  {
-    id: 'fam-06',
-    korean: '형',
-    english: 'older brother (for males)',
-    category: 'family',
-    notes: 'Used by males only'
-  },
-  {
-    id: 'fam-07',
-    korean: '누나',
-    english: 'older sister (for males)',
-    category: 'family',
-    notes: 'Used by males only'
-  },
-  {
-    id: 'fam-08',
-    korean: '오빠',
-    english: 'older brother (for females)',
-    category: 'family',
-    notes: 'Used by females only'
-  },
-  {
-    id: 'fam-09',
-    korean: '언니',
-    english: 'older sister (for females)',
-    category: 'family',
-    notes: 'Used by females only'
-  },
-  {
-    id: 'fam-10',
-    korean: '동생',
-    english: 'younger sibling',
-    category: 'family',
-    notes: 'Gender neutral'
-  },
-
-  // Time (10 words)
-  {
-    id: 'time-01',
-    korean: '오늘',
-    english: 'today',
-    category: 'time'
-  },
-  {
-    id: 'time-02',
-    korean: '어제',
-    english: 'yesterday',
-    category: 'time'
-  },
-  {
-    id: 'time-03',
-    korean: '내일',
-    english: 'tomorrow',
-    category: 'time'
-  },
-  {
-    id: 'time-04',
-    korean: '지금',
-    english: 'now',
-    category: 'time'
-  },
-  {
-    id: 'time-05',
-    korean: '아침',
-    english: 'morning',
-    category: 'time'
-  },
-  {
-    id: 'time-06',
-    korean: '점심',
-    english: 'lunch, noon',
-    category: 'time'
-  },
-  {
-    id: 'time-07',
-    korean: '저녁',
-    english: 'dinner, evening',
-    category: 'time'
-  },
-  {
-    id: 'time-08',
-    korean: '밤',
-    english: 'night',
-    category: 'time'
-  },
-  {
-    id: 'time-09',
-    korean: '주',
-    english: 'week',
-    category: 'time'
-  },
-  {
-    id: 'time-10',
-    korean: '년',
-    english: 'year',
-    category: 'time'
-  },
-
-  // Places (10 words)
-  {
-    id: 'place-01',
-    korean: '집',
-    english: 'house, home',
-    category: 'places'
-  },
-  {
-    id: 'place-02',
-    korean: '학교',
-    english: 'school',
-    category: 'places'
-  },
-  {
-    id: 'place-03',
-    korean: '회사',
-    english: 'company, office',
-    category: 'places'
-  },
-  {
-    id: 'place-04',
-    korean: '병원',
-    english: 'hospital',
-    category: 'places'
-  },
-  {
-    id: 'place-05',
-    korean: '식당',
-    english: 'restaurant',
-    category: 'places'
-  },
-  {
-    id: 'place-06',
-    korean: '가게',
-    english: 'store, shop',
-    category: 'places'
-  },
-  {
-    id: 'place-07',
-    korean: '은행',
-    english: 'bank',
-    category: 'places'
-  },
-  {
-    id: 'place-08',
-    korean: '공원',
-    english: 'park',
-    category: 'places'
-  },
-  {
-    id: 'place-09',
-    korean: '도서관',
-    english: 'library',
-    category: 'places'
-  },
-  {
-    id: 'place-10',
-    korean: '공항',
-    english: 'airport',
-    category: 'places'
-  },
-
-  // Pronouns (5 words)
-  {
-    id: 'pron-01',
-    korean: '나',
-    english: 'I, me (casual)',
-    category: 'pronouns'
-  },
-  {
-    id: 'pron-02',
-    korean: '저',
-    english: 'I, me (formal)',
-    category: 'pronouns'
-  },
-  {
-    id: 'pron-03',
-    korean: '너',
-    english: 'you (casual)',
-    category: 'pronouns',
-    notes: 'Only use with close friends or younger people'
-  },
-  {
-    id: 'pron-04',
-    korean: '우리',
-    english: 'we, us, our',
-    category: 'pronouns'
-  },
-  {
-    id: 'pron-05',
-    korean: '이것',
-    english: 'this',
-    category: 'pronouns'
-  },
-
-  // Common Phrases (10 words)
-  {
-    id: 'phrase-01',
-    korean: '네',
-    english: 'yes',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-02',
-    korean: '아니요',
-    english: 'no',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-03',
-    korean: '괜찮아요',
-    english: 'it\'s okay, I\'m fine',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-04',
-    korean: '잘 먹겠습니다',
-    english: 'I will eat well',
-    category: 'common-phrases',
-    notes: 'Said before eating'
-  },
-  {
-    id: 'phrase-05',
-    korean: '잘 먹었습니다',
-    english: 'I ate well',
-    category: 'common-phrases',
-    notes: 'Said after eating'
-  },
-  {
-    id: 'phrase-06',
-    korean: '얼마예요?',
-    english: 'how much is it?',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-07',
-    korean: '어디예요?',
-    english: 'where is it?',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-08',
-    korean: '뭐예요?',
-    english: 'what is it?',
-    category: 'common-phrases'
-  },
-  {
-    id: 'phrase-09',
-    korean: '주세요',
-    english: 'please give me',
-    category: 'common-phrases',
-    notes: 'Used when ordering or requesting'
-  },
-  {
-    id: 'phrase-10',
-    korean: '화이팅',
-    english: 'fighting! (encouragement)',
-    category: 'common-phrases',
-    notes: 'Borrowed from English, means "you can do it!"'
-  },
+export const chapters: Chapter[] = [
+  { number: 1, title: "Basic Greetings & Introductions", description: "Essential phrases for meeting people", wordCount: 50 },
+  { number: 2, title: "Numbers & Counting", description: "Native and Sino-Korean numbers", wordCount: 50 },
+  { number: 3, title: "Family & Relationships", description: "Family members and relationships", wordCount: 50 },
+  { number: 4, title: "Daily Routines & Time", description: "Daily activities and time expressions", wordCount: 50 },
+  { number: 5, title: "Food & Dining", description: "Korean food and dining vocabulary", wordCount: 50 },
+  { number: 6, title: "Shopping & Money", description: "Shopping and financial terms", wordCount: 50 },
+  { number: 7, title: "Transportation", description: "Travel and transportation", wordCount: 50 },
+  { number: 8, title: "Dates & Seasons", description: "Calendar and weather vocabulary", wordCount: 50 },
+  { number: 9, title: "Body & Health", description: "Body parts and health terms", wordCount: 50 },
+  { number: 10, title: "School & Learning", description: "Education and study vocabulary", wordCount: 50 },
+  { number: 11, title: "Work & Career", description: "Jobs and workplace terms", wordCount: 50 },
+  { number: 12, title: "Home & Living", description: "House and household items", wordCount: 50 },
+  { number: 13, title: "Clothing & Style", description: "Clothes and appearance", wordCount: 50 },
+  { number: 14, title: "Emotions & Personality", description: "Feelings and character traits", wordCount: 50 },
+  { number: 15, title: "Hobbies & Entertainment", description: "Leisure activities", wordCount: 50 },
+  { number: 16, title: "Nature & Environment", description: "Natural world vocabulary", wordCount: 50 },
+  { number: 17, title: "Places & Directions", description: "Locations and navigation", wordCount: 50 },
+  { number: 18, title: "Technology & Media", description: "Modern tech vocabulary", wordCount: 50 },
+  { number: 19, title: "Social & Cultural", description: "Social situations and culture", wordCount: 50 },
+  { number: 20, title: "Advanced Expressions", description: "Complex verbs and phrases", wordCount: 50 },
 ]
 
-export const getWordsByCategory = (category: string): Word[] => {
-  return vocabulary.filter(word => word.category === category)
+export const vocabulary: Word[] = [
+  // Chapter 1: Basic Greetings & Introductions (50 words)
+  { id: 'ch1-001', korean: '안녕하세요', english: 'hello (formal)', chapter: 1, category: 'greeting' },
+  { id: 'ch1-002', korean: '안녕', english: 'hi (casual)', chapter: 1, category: 'greeting' },
+  { id: 'ch1-003', korean: '안녕히 가세요', english: 'goodbye (stay well)', chapter: 1, category: 'greeting' },
+  { id: 'ch1-004', korean: '안녕히 계세요', english: 'goodbye (go well)', chapter: 1, category: 'greeting' },
+  { id: 'ch1-005', korean: '감사합니다', english: 'thank you', chapter: 1, category: 'politeness' },
+  { id: 'ch1-006', korean: '고맙습니다', english: 'thanks', chapter: 1, category: 'politeness' },
+  { id: 'ch1-007', korean: '미안합니다', english: 'sorry (formal)', chapter: 1, category: 'politeness' },
+  { id: 'ch1-008', korean: '죄송합니다', english: 'I apologize', chapter: 1, category: 'politeness' },
+  { id: 'ch1-009', korean: '실례합니다', english: 'excuse me', chapter: 1, category: 'politeness' },
+  { id: 'ch1-010', korean: '괜찮아요', english: "it's okay", chapter: 1, category: 'response' },
+  { id: 'ch1-011', korean: '네', english: 'yes', chapter: 1, category: 'response' },
+  { id: 'ch1-012', korean: '아니요', english: 'no', chapter: 1, category: 'response' },
+  { id: 'ch1-013', korean: '이름', english: 'name', chapter: 1, category: 'noun' },
+  { id: 'ch1-014', korean: '저', english: 'I (humble)', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-015', korean: '나', english: 'I (casual)', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-016', korean: '당신', english: 'you (formal)', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-017', korean: '우리', english: 'we/us', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-018', korean: '이것', english: 'this', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-019', korean: '그것', english: 'that', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-020', korean: '저것', english: 'that (over there)', chapter: 1, category: 'pronoun' },
+  { id: 'ch1-021', korean: '사람', english: 'person', chapter: 1, category: 'noun' },
+  { id: 'ch1-022', korean: '친구', english: 'friend', chapter: 1, category: 'noun' },
+  { id: 'ch1-023', korean: '선생님', english: 'teacher', chapter: 1, category: 'noun' },
+  { id: 'ch1-024', korean: '학생', english: 'student', chapter: 1, category: 'noun' },
+  { id: 'ch1-025', korean: '만나다', english: 'to meet', chapter: 1, category: 'verb' },
+  { id: 'ch1-026', korean: '처음', english: 'first time', chapter: 1, category: 'noun' },
+  { id: 'ch1-027', korean: '반갑습니다', english: 'nice to meet you', chapter: 1, category: 'greeting' },
+  { id: 'ch1-028', korean: '잘', english: 'well', chapter: 1, category: 'adverb' },
+  { id: 'ch1-029', korean: '부탁합니다', english: 'please (asking favor)', chapter: 1, category: 'phrase' },
+  { id: 'ch1-030', korean: '어디', english: 'where', chapter: 1, category: 'question' },
+  { id: 'ch1-031', korean: '누구', english: 'who', chapter: 1, category: 'question' },
+  { id: 'ch1-032', korean: '무엇', english: 'what', chapter: 1, category: 'question' },
+  { id: 'ch1-033', korean: '언제', english: 'when', chapter: 1, category: 'question' },
+  { id: 'ch1-034', korean: '왜', english: 'why', chapter: 1, category: 'question' },
+  { id: 'ch1-035', korean: '어떻게', english: 'how', chapter: 1, category: 'question' },
+  { id: 'ch1-036', korean: '국적', english: 'nationality', chapter: 1, category: 'noun' },
+  { id: 'ch1-037', korean: '한국', english: 'Korea', chapter: 1, category: 'noun' },
+  { id: 'ch1-038', korean: '미국', english: 'America', chapter: 1, category: 'noun' },
+  { id: 'ch1-039', korean: '일본', english: 'Japan', chapter: 1, category: 'noun' },
+  { id: 'ch1-040', korean: '중국', english: 'China', chapter: 1, category: 'noun' },
+  { id: 'ch1-041', korean: '영어', english: 'English language', chapter: 1, category: 'noun' },
+  { id: 'ch1-042', korean: '한국어', english: 'Korean language', chapter: 1, category: 'noun' },
+  { id: 'ch1-043', korean: '말하다', english: 'to speak', chapter: 1, category: 'verb' },
+  { id: 'ch1-044', korean: '듣다', english: 'to listen', chapter: 1, category: 'verb' },
+  { id: 'ch1-045', korean: '이해하다', english: 'to understand', chapter: 1, category: 'verb' },
+  { id: 'ch1-046', korean: '알다', english: 'to know', chapter: 1, category: 'verb' },
+  { id: 'ch1-047', korean: '모르다', english: 'to not know', chapter: 1, category: 'verb' },
+  { id: 'ch1-048', korean: '천천히', english: 'slowly', chapter: 1, category: 'adverb' },
+  { id: 'ch1-049', korean: '다시', english: 'again', chapter: 1, category: 'adverb' },
+  { id: 'ch1-050', korean: '좀', english: 'a little/please', chapter: 1, category: 'adverb' },
+
+  // Chapter 2: Numbers & Counting (50 words)
+  { id: 'ch2-001', korean: '하나', english: 'one (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-002', korean: '둘', english: 'two (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-003', korean: '셋', english: 'three (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-004', korean: '넷', english: 'four (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-005', korean: '다섯', english: 'five (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-006', korean: '여섯', english: 'six (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-007', korean: '일곱', english: 'seven (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-008', korean: '여덟', english: 'eight (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-009', korean: '아홉', english: 'nine (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-010', korean: '열', english: 'ten (native)', chapter: 2, category: 'number' },
+  { id: 'ch2-011', korean: '일', english: 'one (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-012', korean: '이', english: 'two (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-013', korean: '삼', english: 'three (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-014', korean: '사', english: 'four (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-015', korean: '오', english: 'five (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-016', korean: '육', english: 'six (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-017', korean: '칠', english: 'seven (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-018', korean: '팔', english: 'eight (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-019', korean: '구', english: 'nine (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-020', korean: '십', english: 'ten (sino)', chapter: 2, category: 'number' },
+  { id: 'ch2-021', korean: '백', english: 'hundred', chapter: 2, category: 'number' },
+  { id: 'ch2-022', korean: '천', english: 'thousand', chapter: 2, category: 'number' },
+  { id: 'ch2-023', korean: '만', english: 'ten thousand', chapter: 2, category: 'number' },
+  { id: 'ch2-024', korean: '개', english: 'counter for things', chapter: 2, category: 'counter' },
+  { id: 'ch2-025', korean: '명', english: 'counter for people', chapter: 2, category: 'counter' },
+  { id: 'ch2-026', korean: '마리', english: 'counter for animals', chapter: 2, category: 'counter' },
+  { id: 'ch2-027', korean: '권', english: 'counter for books', chapter: 2, category: 'counter' },
+  { id: 'ch2-028', korean: '장', english: 'counter for sheets', chapter: 2, category: 'counter' },
+  { id: 'ch2-029', korean: '잔', english: 'counter for cups', chapter: 2, category: 'counter' },
+  { id: 'ch2-030', korean: '병', english: 'counter for bottles', chapter: 2, category: 'counter' },
+  { id: 'ch2-031', korean: '번', english: 'counter for times', chapter: 2, category: 'counter' },
+  { id: 'ch2-032', korean: '층', english: 'counter for floors', chapter: 2, category: 'counter' },
+  { id: 'ch2-033', korean: '첫째', english: 'first', chapter: 2, category: 'ordinal' },
+  { id: 'ch2-034', korean: '둘째', english: 'second', chapter: 2, category: 'ordinal' },
+  { id: 'ch2-035', korean: '셋째', english: 'third', chapter: 2, category: 'ordinal' },
+  { id: 'ch2-036', korean: '몇', english: 'how many', chapter: 2, category: 'question' },
+  { id: 'ch2-037', korean: '얼마', english: 'how much', chapter: 2, category: 'question' },
+  { id: 'ch2-038', korean: '많다', english: 'to be many', chapter: 2, category: 'adjective' },
+  { id: 'ch2-039', korean: '적다', english: 'to be few', chapter: 2, category: 'adjective' },
+  { id: 'ch2-040', korean: '크다', english: 'to be big', chapter: 2, category: 'adjective' },
+  { id: 'ch2-041', korean: '작다', english: 'to be small', chapter: 2, category: 'adjective' },
+  { id: 'ch2-042', korean: '길다', english: 'to be long', chapter: 2, category: 'adjective' },
+  { id: 'ch2-043', korean: '짧다', english: 'to be short', chapter: 2, category: 'adjective' },
+  { id: 'ch2-044', korean: '세다', english: 'to count', chapter: 2, category: 'verb' },
+  { id: 'ch2-045', korean: '더하다', english: 'to add', chapter: 2, category: 'verb' },
+  { id: 'ch2-046', korean: '빼다', english: 'to subtract', chapter: 2, category: 'verb' },
+  { id: 'ch2-047', korean: '곱하다', english: 'to multiply', chapter: 2, category: 'verb' },
+  { id: 'ch2-048', korean: '나누다', english: 'to divide', chapter: 2, category: 'verb' },
+  { id: 'ch2-049', korean: '반', english: 'half', chapter: 2, category: 'noun' },
+  { id: 'ch2-050', korean: '전부', english: 'all/everything', chapter: 2, category: 'noun' },
+
+  // Chapter 3: Family & Relationships (50 words)
+  { id: 'ch3-001', korean: '가족', english: 'family', chapter: 3, category: 'noun' },
+  { id: 'ch3-002', korean: '아버지', english: 'father (formal)', chapter: 3, category: 'family' },
+  { id: 'ch3-003', korean: '어머니', english: 'mother (formal)', chapter: 3, category: 'family' },
+  { id: 'ch3-004', korean: '아빠', english: 'dad', chapter: 3, category: 'family' },
+  { id: 'ch3-005', korean: '엄마', english: 'mom', chapter: 3, category: 'family' },
+  { id: 'ch3-006', korean: '형', english: 'older brother (male speaker)', chapter: 3, category: 'family' },
+  { id: 'ch3-007', korean: '오빠', english: 'older brother (female speaker)', chapter: 3, category: 'family' },
+  { id: 'ch3-008', korean: '누나', english: 'older sister (male speaker)', chapter: 3, category: 'family' },
+  { id: 'ch3-009', korean: '언니', english: 'older sister (female speaker)', chapter: 3, category: 'family' },
+  { id: 'ch3-010', korean: '남동생', english: 'younger brother', chapter: 3, category: 'family' },
+  { id: 'ch3-011', korean: '여동생', english: 'younger sister', chapter: 3, category: 'family' },
+  { id: 'ch3-012', korean: '할아버지', english: 'grandfather', chapter: 3, category: 'family' },
+  { id: 'ch3-013', korean: '할머니', english: 'grandmother', chapter: 3, category: 'family' },
+  { id: 'ch3-014', korean: '삼촌', english: 'uncle (father\'s side)', chapter: 3, category: 'family' },
+  { id: 'ch3-015', korean: '이모', english: 'aunt (mother\'s sister)', chapter: 3, category: 'family' },
+  { id: 'ch3-016', korean: '고모', english: 'aunt (father\'s sister)', chapter: 3, category: 'family' },
+  { id: 'ch3-017', korean: '사촌', english: 'cousin', chapter: 3, category: 'family' },
+  { id: 'ch3-018', korean: '남편', english: 'husband', chapter: 3, category: 'family' },
+  { id: 'ch3-019', korean: '아내', english: 'wife', chapter: 3, category: 'family' },
+  { id: 'ch3-020', korean: '부부', english: 'married couple', chapter: 3, category: 'family' },
+  { id: 'ch3-021', korean: '아들', english: 'son', chapter: 3, category: 'family' },
+  { id: 'ch3-022', korean: '딸', english: 'daughter', chapter: 3, category: 'family' },
+  { id: 'ch3-023', korean: '손자', english: 'grandson', chapter: 3, category: 'family' },
+  { id: 'ch3-024', korean: '손녀', english: 'granddaughter', chapter: 3, category: 'family' },
+  { id: 'ch3-025', korean: '조카', english: 'nephew/niece', chapter: 3, category: 'family' },
+  { id: 'ch3-026', korean: '친척', english: 'relative', chapter: 3, category: 'noun' },
+  { id: 'ch3-027', korean: '결혼', english: 'marriage', chapter: 3, category: 'noun' },
+  { id: 'ch3-028', korean: '결혼하다', english: 'to marry', chapter: 3, category: 'verb' },
+  { id: 'ch3-029', korean: '이혼', english: 'divorce', chapter: 3, category: 'noun' },
+  { id: 'ch3-030', korean: '약혼', english: 'engagement', chapter: 3, category: 'noun' },
+  { id: 'ch3-031', korean: '애인', english: 'lover/significant other', chapter: 3, category: 'noun' },
+  { id: 'ch3-032', korean: '남자친구', english: 'boyfriend', chapter: 3, category: 'noun' },
+  { id: 'ch3-033', korean: '여자친구', english: 'girlfriend', chapter: 3, category: 'noun' },
+  { id: 'ch3-034', korean: '친구', english: 'friend', chapter: 3, category: 'noun' },
+  { id: 'ch3-035', korean: '단짝', english: 'best friend', chapter: 3, category: 'noun' },
+  { id: 'ch3-036', korean: '이웃', english: 'neighbor', chapter: 3, category: 'noun' },
+  { id: 'ch3-037', korean: '나이', english: 'age', chapter: 3, category: 'noun' },
+  { id: 'ch3-038', korean: '젊다', english: 'to be young', chapter: 3, category: 'adjective' },
+  { id: 'ch3-039', korean: '늙다', english: 'to be old (age)', chapter: 3, category: 'adjective' },
+  { id: 'ch3-040', korean: '어리다', english: 'to be young/immature', chapter: 3, category: 'adjective' },
+  { id: 'ch3-041', korean: '태어나다', english: 'to be born', chapter: 3, category: 'verb' },
+  { id: 'ch3-042', korean: '자라다', english: 'to grow up', chapter: 3, category: 'verb' },
+  { id: 'ch3-043', korean: '죽다', english: 'to die', chapter: 3, category: 'verb' },
+  { id: 'ch3-044', korean: '사랑', english: 'love', chapter: 3, category: 'noun' },
+  { id: 'ch3-045', korean: '사랑하다', english: 'to love', chapter: 3, category: 'verb' },
+  { id: 'ch3-046', korean: '좋아하다', english: 'to like', chapter: 3, category: 'verb' },
+  { id: 'ch3-047', korean: '싫어하다', english: 'to dislike', chapter: 3, category: 'verb' },
+  { id: 'ch3-048', korean: '보다', english: 'to see/meet', chapter: 3, category: 'verb' },
+  { id: 'ch3-049', korean: '만나다', english: 'to meet', chapter: 3, category: 'verb' },
+  { id: 'ch3-050', korean: '헤어지다', english: 'to break up/part', chapter: 3, category: 'verb' },
+
+  // Chapter 4: Daily Routines & Time (50 words)
+  { id: 'ch4-001', korean: '시간', english: 'time', chapter: 4, category: 'noun' },
+  { id: 'ch4-002', korean: '아침', english: 'morning', chapter: 4, category: 'noun' },
+  { id: 'ch4-003', korean: '점심', english: 'lunch/noon', chapter: 4, category: 'noun' },
+  { id: 'ch4-004', korean: '저녁', english: 'dinner/evening', chapter: 4, category: 'noun' },
+  { id: 'ch4-005', korean: '밤', english: 'night', chapter: 4, category: 'noun' },
+  { id: 'ch4-006', korean: '오전', english: 'AM/morning', chapter: 4, category: 'noun' },
+  { id: 'ch4-007', korean: '오후', english: 'PM/afternoon', chapter: 4, category: 'noun' },
+  { id: 'ch4-008', korean: '새벽', english: 'dawn', chapter: 4, category: 'noun' },
+  { id: 'ch4-009', korean: '일어나다', english: 'to wake up', chapter: 4, category: 'verb' },
+  { id: 'ch4-010', korean: '자다', english: 'to sleep', chapter: 4, category: 'verb' },
+  { id: 'ch4-011', korean: '씻다', english: 'to wash', chapter: 4, category: 'verb' },
+  { id: 'ch4-012', korean: '샤워하다', english: 'to shower', chapter: 4, category: 'verb' },
+  { id: 'ch4-013', korean: '먹다', english: 'to eat', chapter: 4, category: 'verb' },
+  { id: 'ch4-014', korean: '마시다', english: 'to drink', chapter: 4, category: 'verb' },
+  { id: 'ch4-015', korean: '입다', english: 'to wear', chapter: 4, category: 'verb' },
+  { id: 'ch4-016', korean: '벗다', english: 'to take off', chapter: 4, category: 'verb' },
+  { id: 'ch4-017', korean: '나가다', english: 'to go out', chapter: 4, category: 'verb' },
+  { id: 'ch4-018', korean: '들어오다', english: 'to come in', chapter: 4, category: 'verb' },
+  { id: 'ch4-019', korean: '출근하다', english: 'to go to work', chapter: 4, category: 'verb' },
+  { id: 'ch4-020', korean: '퇴근하다', english: 'to leave work', chapter: 4, category: 'verb' },
+  { id: 'ch4-021', korean: '운동하다', english: 'to exercise', chapter: 4, category: 'verb' },
+  { id: 'ch4-022', korean: '쉬다', english: 'to rest', chapter: 4, category: 'verb' },
+  { id: 'ch4-023', korean: '청소하다', english: 'to clean', chapter: 4, category: 'verb' },
+  { id: 'ch4-024', korean: '요리하다', english: 'to cook', chapter: 4, category: 'verb' },
+  { id: 'ch4-025', korean: '준비하다', english: 'to prepare', chapter: 4, category: 'verb' },
+  { id: 'ch4-026', korean: '시작하다', english: 'to start', chapter: 4, category: 'verb' },
+  { id: 'ch4-027', korean: '끝나다', english: 'to end', chapter: 4, category: 'verb' },
+  { id: 'ch4-028', korean: '바쁘다', english: 'to be busy', chapter: 4, category: 'adjective' },
+  { id: 'ch4-029', korean: '피곤하다', english: 'to be tired', chapter: 4, category: 'adjective' },
+  { id: 'ch4-030', korean: '심심하다', english: 'to be bored', chapter: 4, category: 'adjective' },
+  { id: 'ch4-031', korean: '늦다', english: 'to be late', chapter: 4, category: 'adjective' },
+  { id: 'ch4-032', korean: '빠르다', english: 'to be fast', chapter: 4, category: 'adjective' },
+  { id: 'ch4-033', korean: '일찍', english: 'early', chapter: 4, category: 'adverb' },
+  { id: 'ch4-034', korean: '늦게', english: 'late', chapter: 4, category: 'adverb' },
+  { id: 'ch4-035', korean: '항상', english: 'always', chapter: 4, category: 'adverb' },
+  { id: 'ch4-036', korean: '가끔', english: 'sometimes', chapter: 4, category: 'adverb' },
+  { id: 'ch4-037', korean: '자주', english: 'often', chapter: 4, category: 'adverb' },
+  { id: 'ch4-038', korean: '매일', english: 'every day', chapter: 4, category: 'adverb' },
+  { id: 'ch4-039', korean: '보통', english: 'usually', chapter: 4, category: 'adverb' },
+  { id: 'ch4-040', korean: '오늘', english: 'today', chapter: 4, category: 'noun' },
+  { id: 'ch4-041', korean: '어제', english: 'yesterday', chapter: 4, category: 'noun' },
+  { id: 'ch4-042', korean: '내일', english: 'tomorrow', chapter: 4, category: 'noun' },
+  { id: 'ch4-043', korean: '지금', english: 'now', chapter: 4, category: 'noun' },
+  { id: 'ch4-044', korean: '나중에', english: 'later', chapter: 4, category: 'adverb' },
+  { id: 'ch4-045', korean: '곧', english: 'soon', chapter: 4, category: 'adverb' },
+  { id: 'ch4-046', korean: '벌써', english: 'already', chapter: 4, category: 'adverb' },
+  { id: 'ch4-047', korean: '아직', english: 'yet/still', chapter: 4, category: 'adverb' },
+  { id: 'ch4-048', korean: '일상', english: 'daily life', chapter: 4, category: 'noun' },
+  { id: 'ch4-049', korean: '습관', english: 'habit', chapter: 4, category: 'noun' },
+  { id: 'ch4-050', korean: '생활', english: 'life/living', chapter: 4, category: 'noun' },
+]
+
+export const getWordsByChapter = (chapter: number): Word[] => {
+  return vocabulary.filter(word => word.chapter === chapter)
+}
+
+export const getWordById = (id: string): Word | undefined => {
+  return vocabulary.find(word => word.id === id)
 }
 
 export const getAllCategories = (): string[] => {
@@ -699,6 +246,6 @@ export const getAllCategories = (): string[] => {
   return Array.from(categories).sort()
 }
 
-export const getWordById = (id: string): Word | undefined => {
-  return vocabulary.find(word => word.id === id)
+export const getChapterInfo = (chapterNumber: number): Chapter | undefined => {
+  return chapters.find(ch => ch.number === chapterNumber)
 }

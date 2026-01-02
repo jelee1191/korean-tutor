@@ -2,8 +2,16 @@ export interface Word {
   id: string
   korean: string        // 안녕하세요
   english: string       // hello (formal)
-  category: string      // greetings
+  chapter: number       // 1-20
+  category: string      // greetings, verbs, etc.
   notes?: string        // usage context, example sentences
+}
+
+export interface Chapter {
+  number: number
+  title: string
+  description: string
+  wordCount: number
 }
 
 export interface UserProgress {
