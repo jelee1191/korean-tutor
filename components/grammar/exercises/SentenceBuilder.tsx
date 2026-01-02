@@ -47,7 +47,7 @@ export default function SentenceBuilder({ exercise, onAnswer }: SentenceBuilderP
   }
 
   const handleCheck = () => {
-    if (hasAnswered || selectedWords.length !== exercise.words.length) return
+    if (hasAnswered || selectedWords.length !== exercise.correctOrder.length) return
 
     const correct = JSON.stringify(selectedWords) === JSON.stringify(exercise.correctOrder)
 
