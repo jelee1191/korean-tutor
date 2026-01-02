@@ -29,23 +29,23 @@ npm lint
 
 ### Data Layer
 
-**Vocabulary Organization** (`data/vocabulary.ts`):
-- Chapter-based structure: 20 chapters × 50 words = 1,000 total words
-- Each `Word` has: `id`, `korean`, `english`, `chapter` (1-20), `category`, optional `notes`
-- Export functions: `getWordsByChapter()`, `getWordById()`, `getAllCategories()`, `getChapterInfo()`
-- Chapters 1-4 complete (200 words), Chapters 5-20 planned
+**Content Storage** (Supabase Database):
+- All vocabulary and grammar content stored in Supabase PostgreSQL
+- 4 content tables: `chapters`, `vocabulary`, `grammar_lessons`, `grammar_exercises`
+- Fetched at BUILD TIME (not runtime) for static page generation
+- See `supabase-schema-content.sql` for schema
 
-**Vocabulary Data** (`data/vocabulary.ts`):
-- Chapter-based structure: 20 chapters × 50 words = 1,000 total words
-- Each `Word` has: `id`, `korean`, `english`, `chapter` (1-20), `category`, optional `notes`
-- Export functions: `getWordsByChapter()`, `getWordById()`, `getAllCategories()`, `getChapterInfo()`
-- Chapters 1-4 complete (200 words), Chapters 5-20 planned
+**Content Access Layer** (`lib/supabaseContent.ts`):
+- Server-side async functions for build-time data fetching
+- Vocabulary: `getAllVocabulary()`, `getVocabularyByChapter()`, `getWordById()`, `getAllCategories()`
+- Grammar: `getAllGrammarLessons()`, `getLessonById()`, `getExercisesByLesson()`
+- Chapters: `getAllChapters()`, `getChapterInfo()`
+- **Only callable from Server Components** (not client components)
 
-**Grammar Data** (`data/grammar.ts`):
-- Lesson structure: `GrammarLesson` with explanation, examples, sentence breakdowns
-- Exercise types: `MultipleChoiceExercise`, `FillInBlankExercise`, `SentenceBuildingExercise`
-- Export functions: `getLessonsByChapter()`, `getLessonById()`, `getExercisesByLesson()`, `getExerciseById()`
-- 6 lessons for Chapters 1-2 complete with 20+ exercises
+**Legacy Data Files** (`data/vocabulary.ts`, `data/grammar.ts`):
+- Original TypeScript data files kept for reference
+- Used by seed script (`scripts/seed-database.ts`) to populate Supabase
+- NOT used by the app at runtime (deprecated)
 
 **Progress Storage** (dual system):
 - **Vocabulary Progress**:
@@ -105,14 +105,19 @@ npm lint
 
 ### Component Structure
 
+**Server/Client Component Pattern**:
+All pages use a hybrid architecture:
+- **Server Component** (`page.tsx`): Fetches data from Supabase at build time, passes to client
+- **Client Component** (`*Client.tsx`): Handles user interactions, state, progress hooks
+
 **Page Routes**:
-- `/` (`app/page.tsx`): Dashboard showing stats and navigation
-- `/practice` (`app/practice/page.tsx`): Flashcard practice session
-- `/words` (`app/words/page.tsx`): Vocabulary browser with filters
-- `/grammar` (`app/grammar/page.tsx`): Grammar lessons hub
-- `/grammar/[lessonId]` (`app/grammar/[lessonId]/page.tsx`): Individual lesson view
-- `/grammar/[lessonId]/practice` (`app/grammar/[lessonId]/practice/page.tsx`): Exercise practice session
-- `/grammar/review` (`app/grammar/review/page.tsx`): SRS review for due grammar exercises
+- `/` (`app/page.tsx` → `DashboardClient.tsx`): Dashboard with stats and navigation
+- `/practice` (`app/practice/page.tsx` → `PracticeClient.tsx`): Flashcard practice session
+- `/words` (`app/words/page.tsx` → `WordsClient.tsx`): Vocabulary browser with filters
+- `/grammar` (`app/grammar/page.tsx` → `GrammarClient.tsx`): Grammar lessons hub
+- `/grammar/[lessonId]` (→ `LessonClient.tsx`): Individual lesson view (uses `generateStaticParams`)
+- `/grammar/[lessonId]/practice` (→ `PracticeClient.tsx`): Exercise practice (uses `generateStaticParams`)
+- `/grammar/review` (`app/grammar/review/page.tsx`): SRS review for due grammar exercises (fully client-side)
 
 **Vocabulary Components**:
 - `Flashcard.tsx`: Card component for practice (no flip animations)
@@ -129,7 +134,14 @@ npm lint
 
 ### Database Schema
 
-**Supabase Table** (`supabase-schema.sql`):
+**Content Tables** (`supabase-schema-content.sql`):
+- `chapters`: Chapter metadata (number, title, description, word_count)
+- `vocabulary`: All vocabulary words (id, korean, english, chapter, category, notes)
+- `grammar_lessons`: Grammar lessons (id, title, chapter, explanation, examples JSONB, difficulty)
+- `grammar_exercises`: Exercises (id, lesson_id, type, difficulty, data JSONB)
+- **RLS disabled** (public read-only content)
+
+**User Progress Table** (`supabase-schema.sql`):
 ```sql
 user_progress (
   id UUID PRIMARY KEY,
@@ -142,27 +154,85 @@ user_progress (
   UNIQUE(user_id, word_id)
 )
 ```
-- Row-Level Security (RLS) enabled - users only see their own progress
+- **RLS enabled** - users only see their own progress
 - Indexes on `user_id` and `(user_id, next_review)` for performance
 - Auto-updating `updated_at` timestamp via trigger
 
 ## Key Implementation Patterns
 
+### Static Generation Architecture
+
+**Build Time** (when deploying):
+1. Next.js runs all Server Components
+2. Server Components call `supabaseContent.ts` functions
+3. Data fetched from Supabase database
+4. Static HTML pages generated with embedded data
+5. Deployed to CDN (Vercel Edge Network)
+
+**Runtime** (when users visit):
+1. Static pages served instantly (<50ms latency)
+2. **Zero database queries** for content
+3. User progress still uses Supabase (separate concern)
+
+**Updating Content**:
+1. Add/edit content directly in Supabase (Table Editor or SQL)
+2. Trigger manual rebuild in Vercel dashboard
+3. New build fetches updated content and regenerates pages
+4. Deploy new static pages
+
+**Key Files**:
+- `lib/supabaseContent.ts` - Server-side fetch functions (async)
+- `app/*/page.tsx` - Server components (fetch data)
+- `app/*/*Client.tsx` - Client components (handle interactions)
+- Pages export `dynamic = 'force-static'` to enforce static generation
+
 ### Adding New Vocabulary
 
-When adding words to `data/vocabulary.ts`:
-1. Follow chapter-based ID format: `ch{N}-{XXX}` (e.g., `ch5-001`)
-2. Ensure chapter numbers 1-20
-3. Maintain 50 words per chapter
-4. Include Korean, English, chapter, and category
-5. Place chapter data BEFORE the final export functions
+**Recommended: Add directly to Supabase**:
+1. Go to Supabase → Table Editor → `vocabulary`
+2. Insert new row with proper format: `ch{N}-{XXX}` (e.g., `ch5-001`)
+3. Trigger rebuild in Vercel to regenerate pages
 
-### Client-Side Rendering Requirements
+**Alternative: Update seed script**:
+1. Edit `data/vocabulary.ts` (now a legacy file used only for seeding)
+2. Run seed script: `npx ts-node scripts/seed-database.ts`
+3. Data synced to Supabase
+4. Trigger rebuild in Vercel
 
-All pages using `useProgress` or auth must be client components (`'use client'` directive) because:
-- localStorage only available in browser
-- Supabase auth requires client context
-- Next.js App Router defaults to Server Components
+### Server vs Client Components
+
+**Server Components** (`page.tsx` files):
+- NO `'use client'` directive
+- Can use async/await
+- Fetch data from Supabase at build time
+- Cannot use hooks, state, or browser APIs
+- Pass data as props to client components
+
+**Client Components** (`*Client.tsx` files):
+- MUST have `'use client'` directive
+- Use hooks: `useProgress`, `useGrammarProgress`, `useState`, `useRouter`
+- Handle user interactions, state, animations
+- Access localStorage, browser APIs
+- Receive data as props from server components
+
+**Hybrid Pattern**:
+```typescript
+// app/words/page.tsx (Server Component)
+import { getAllVocabulary } from '@/lib/supabaseContent'
+import WordsClient from './WordsClient'
+
+export default async function WordsPage() {
+  const vocabulary = await getAllVocabulary()  // Build-time fetch
+  return <WordsClient vocabulary={vocabulary} />  // Pass to client
+}
+
+// app/words/WordsClient.tsx (Client Component)
+'use client'
+export default function WordsClient({ vocabulary }) {
+  const { getWordProgress } = useProgress()  // Client-side hook
+  // ... interactive logic
+}
+```
 
 ### Progress Tracking Pattern
 

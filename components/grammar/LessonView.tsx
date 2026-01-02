@@ -7,11 +7,10 @@ import { useState } from 'react'
 interface LessonViewProps {
   lesson: GrammarLesson
   isCompleted: boolean
-  onComplete: () => void
   onStartExercises: () => void
 }
 
-export default function LessonView({ lesson, isCompleted, onComplete, onStartExercises }: LessonViewProps) {
+export default function LessonView({ lesson, isCompleted, onStartExercises }: LessonViewProps) {
   const [audioAvailable] = useState(isSpeechAvailable())
 
   const handlePlayExample = (korean: string) => {
@@ -129,20 +128,12 @@ export default function LessonView({ lesson, isCompleted, onComplete, onStartExe
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-4">
-        {!isCompleted && (
-          <button
-            onClick={onComplete}
-            className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-4 px-8 rounded-xl transition-all hover:scale-105"
-          >
-            Mark as Complete
-          </button>
-        )}
+      <div className="flex justify-center">
         <button
           onClick={onStartExercises}
-          className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-lg"
+          className="w-full max-w-md bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-lg"
         >
-          Start Exercises →
+          {isCompleted ? 'Practice Again →' : 'Start Exercises →'}
         </button>
       </div>
     </div>
