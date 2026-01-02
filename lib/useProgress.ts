@@ -9,34 +9,83 @@ import {
   getWordsForReview,
   clearAllProgress,
 } from './storage'
+import {
+  loadProgressFromSupabase,
+  saveProgressToSupabase,
+  migrateLocalStorageToSupabase,
+} from './supabaseStorage'
+import { useAuth } from './AuthContext'
 
 export const useProgress = () => {
+  const { user } = useAuth()
   const [progress, setProgress] = useState<Record<string, UserProgress>>({})
   const [isLoaded, setIsLoaded] = useState(false)
+  const [hasMigrated, setHasMigrated] = useState(false)
 
-  // Load progress from localStorage on mount
+  // Load progress (from Supabase if logged in, otherwise localStorage)
   useEffect(() => {
-    const loaded = loadProgress()
-    setProgress(loaded)
-    setIsLoaded(true)
-  }, [])
+    const loadData = async () => {
+      if (user) {
+        // User is logged in - load from Supabase
+        const supabaseProgress = await loadProgressFromSupabase()
 
-  // Save progress to localStorage whenever it changes
+        // Check if we need to migrate localStorage data
+        if (!hasMigrated) {
+          const localProgress = loadProgress()
+          const hasLocalData = Object.keys(localProgress).length > 0
+          const hasSupabaseData = Object.keys(supabaseProgress).length > 0
+
+          if (hasLocalData && !hasSupabaseData) {
+            // Migrate localStorage to Supabase
+            try {
+              await migrateLocalStorageToSupabase(localProgress)
+              setProgress(localProgress)
+              setHasMigrated(true)
+            } catch (error) {
+              console.error('Migration failed:', error)
+              setProgress(supabaseProgress)
+            }
+          } else {
+            setProgress(supabaseProgress)
+          }
+        } else {
+          setProgress(supabaseProgress)
+        }
+      } else {
+        // Not logged in - use localStorage
+        const localProgress = loadProgress()
+        setProgress(localProgress)
+      }
+      setIsLoaded(true)
+    }
+
+    loadData()
+  }, [user, hasMigrated])
+
+  // Save progress (to Supabase if logged in, otherwise localStorage)
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && !user) {
+      // Only save to localStorage if not logged in
       saveProgress(progress)
     }
-  }, [progress, isLoaded])
+  }, [progress, isLoaded, user])
 
-  const recordAnswer = useCallback((wordId: string, isCorrect: boolean) => {
+  const recordAnswer = useCallback(async (wordId: string, isCorrect: boolean) => {
     setProgress(prev => {
       const updated = updateWordProgress(wordId, isCorrect, prev[wordId])
-      return {
+      const newProgress = {
         ...prev,
         [wordId]: updated,
       }
+
+      // Save to Supabase if logged in
+      if (user) {
+        saveProgressToSupabase(wordId, updated)
+      }
+
+      return newProgress
     })
-  }, [])
+  }, [user])
 
   const getWordProgress = useCallback(
     (wordId: string): UserProgress | undefined => {
