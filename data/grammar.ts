@@ -293,7 +293,7 @@ export const grammarExercises: Exercise[] = [
     type: 'sentence_building',
     difficulty: 3,
     instruction: 'Arrange the words to make a sentence',
-    words: ['저', '는', '학생', '입니다'],
+    words: ['저', '는', '학생', '입니다', '이', '선생님'],
     correctOrder: [0, 1, 2, 3],
     englishPrompt: 'I am a student',
     explanation: 'Korean word order: Topic + topic particle + noun + copula'
@@ -330,7 +330,7 @@ export const grammarExercises: Exercise[] = [
     type: 'sentence_building',
     difficulty: 2,
     instruction: 'Build a complete sentence',
-    words: ['저는', '미국', '사람', '입니다'],
+    words: ['저는', '미국', '사람', '입니다', '한국', '이에요'],
     correctOrder: [0, 1, 2, 3],
     englishPrompt: 'I am American',
     explanation: 'Pattern: [Topic] + [Noun] + 입니다'
@@ -453,7 +453,7 @@ export const grammarExercises: Exercise[] = [
     type: 'sentence_building',
     difficulty: 3,
     instruction: 'Build the sentence',
-    words: ['사람', '다섯', '명', '있습니다'],
+    words: ['사람', '다섯', '명', '있습니다', '개', '여섯'],
     correctOrder: [0, 1, 2, 3],
     englishPrompt: 'There are 5 people',
     explanation: 'Pattern: Noun + Number + Counter + Verb'

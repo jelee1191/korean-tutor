@@ -63,28 +63,28 @@ export default function MultipleChoice({ exercise, onAnswer }: MultipleChoicePro
   return (
     <div className="w-full max-w-3xl mx-auto">
       {/* Question */}
-      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 mb-8 shadow-xl">
-        <div className="text-white/80 text-sm font-medium mb-2">
+      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-xl">
+        <div className="text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
           {exercise.instruction}
         </div>
-        <div className="text-3xl font-bold text-white">
+        <div className="text-lg sm:text-2xl font-bold text-white">
           {exercise.question}
         </div>
         {exercise.hint && !hasAnswered && (
-          <div className="mt-4 text-white/70 text-sm italic">
+          <div className="mt-2 sm:mt-3 text-white/70 text-xs sm:text-sm italic">
             💡 Hint: {exercise.hint}
           </div>
         )}
       </div>
 
       {/* Options */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
         {exercise.options.map((option, index) => (
           <button
             key={index}
             onClick={() => handleSelect(index)}
             disabled={hasAnswered}
-            className={`${getButtonStyle(index)} p-6 rounded-xl transition-all text-left text-xl font-semibold flex items-center justify-between ${
+            className={`${getButtonStyle(index)} p-3 sm:p-4 rounded-lg transition-all text-left text-base sm:text-lg font-semibold flex items-center justify-between ${
               !hasAnswered ? 'hover:scale-105 cursor-pointer' : 'cursor-default'
             }`}
           >
@@ -97,18 +97,18 @@ export default function MultipleChoice({ exercise, onAnswer }: MultipleChoicePro
       {/* Explanation (shown after answer) */}
       {hasAnswered && (
         <>
-          <div className={`rounded-xl p-6 mb-6 ${
+          <div className={`rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 ${
             selectedIndex === exercise.correctIndex ? 'bg-green-50 border-2 border-green-200' : 'bg-red-50 border-2 border-red-200'
           }`}>
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">
+            <div className="flex items-start gap-2">
+              <span className="text-xl sm:text-2xl">
                 {selectedIndex === exercise.correctIndex ? '✓' : '✗'}
               </span>
               <div>
-                <p className="font-semibold text-lg mb-2">
+                <p className="font-semibold text-base sm:text-lg mb-1">
                   {selectedIndex === exercise.correctIndex ? 'Correct!' : 'Incorrect'}
                 </p>
-                <p className="text-gray-700">{exercise.explanation}</p>
+                <p className="text-sm sm:text-base text-gray-700">{exercise.explanation}</p>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function MultipleChoice({ exercise, onAnswer }: MultipleChoicePro
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-lg"
+            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all hover:scale-105 shadow-lg text-sm sm:text-base"
           >
             Next Exercise →
           </button>

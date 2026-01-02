@@ -47,23 +47,23 @@ export default function FillInBlank({ exercise, onAnswer }: FillInBlankProps) {
   return (
     <div className="w-full max-w-3xl mx-auto">
       {/* Instruction */}
-      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8 mb-8 shadow-xl">
-        <div className="text-white/80 text-sm font-medium mb-2">
+      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-xl">
+        <div className="text-white/80 text-xs sm:text-sm font-medium mb-1 sm:mb-2">
           {exercise.instruction}
         </div>
-        <div className="text-3xl font-bold text-white">
+        <div className="text-lg sm:text-2xl font-bold text-white">
           Fill in the blank
         </div>
         {exercise.hint && !hasAnswered && (
-          <div className="mt-4 text-white/70 text-sm italic">
+          <div className="mt-2 sm:mt-3 text-white/70 text-xs sm:text-sm italic">
             💡 Hint: {exercise.hint}
           </div>
         )}
       </div>
 
       {/* Sentence with blank */}
-      <div className="bg-white rounded-2xl p-8 mb-8 shadow-lg">
-        <div className="text-2xl font-bold text-gray-800 flex items-center justify-center flex-wrap gap-2">
+      <div className="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-lg">
+        <div className="text-lg sm:text-xl font-bold text-gray-800 flex items-center justify-center flex-wrap gap-2">
           {parts[0] && <span>{parts[0]}</span>}
 
           {!hasAnswered ? (
@@ -93,7 +93,7 @@ export default function FillInBlank({ exercise, onAnswer }: FillInBlankProps) {
         <button
           onClick={handleSubmit}
           disabled={!userAnswer.trim()}
-          className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base"
         >
           Check Answer
         </button>
@@ -102,23 +102,23 @@ export default function FillInBlank({ exercise, onAnswer }: FillInBlankProps) {
       {/* Explanation (shown after answer) */}
       {hasAnswered && (
         <>
-          <div className={`rounded-xl p-6 mb-6 ${
+          <div className={`rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 ${
             isCorrect ? 'bg-green-50 border-2 border-green-200' : 'bg-red-50 border-2 border-red-200'
           }`}>
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">
+            <div className="flex items-start gap-2">
+              <span className="text-xl sm:text-2xl">
                 {isCorrect ? '✓' : '✗'}
               </span>
               <div className="flex-1">
-                <p className="font-semibold text-lg mb-2">
+                <p className="font-semibold text-base sm:text-lg mb-1">
                   {isCorrect ? 'Correct!' : 'Incorrect'}
                 </p>
                 {!isCorrect && (
-                  <p className="text-gray-700 mb-2">
+                  <p className="text-sm sm:text-base text-gray-700 mb-1 sm:mb-2">
                     Correct answer: <strong className="text-green-700">{exercise.correctAnswer}</strong>
                   </p>
                 )}
-                <p className="text-gray-700">{exercise.explanation}</p>
+                <p className="text-sm sm:text-base text-gray-700">{exercise.explanation}</p>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function FillInBlank({ exercise, onAnswer }: FillInBlankProps) {
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-lg"
+            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all hover:scale-105 shadow-lg text-sm sm:text-base"
           >
             Next Exercise →
           </button>
