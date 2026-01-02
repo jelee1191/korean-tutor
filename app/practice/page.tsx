@@ -15,6 +15,7 @@ export default function PracticePage() {
 
   useEffect(() => {
     if (!isLoaded) return
+    if (sessionWords.length > 0) return // Don't re-run if we already have words
 
     const dueWords = getDueWords()
 
@@ -36,7 +37,8 @@ export default function PracticePage() {
       }
       setSessionWords(wordsToReview)
     }
-  }, [isLoaded, getDueWords])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded])
 
   const handleAnswer = (isCorrect: boolean) => {
     const currentWordId = sessionWords[currentIndex]
