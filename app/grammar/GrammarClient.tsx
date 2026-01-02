@@ -106,7 +106,7 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <h3 className="text-xl font-bold text-gray-900">
-                              {lesson.title}
+                              Lesson {lesson.order}: {lesson.title}
                             </h3>
                             {completed && (
                               <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
@@ -118,14 +118,7 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
                           <p className="text-gray-500 text-sm">{lesson.description}</p>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between mt-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          lesson.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
-                          lesson.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
-                          'bg-red-100 text-red-700'
-                        }`}>
-                          {lesson.difficulty}
-                        </span>
+                      <div className="flex items-center justify-end mt-4">
                         <span className="text-indigo-600 font-semibold">
                           Start Lesson →
                         </span>

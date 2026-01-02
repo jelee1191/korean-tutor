@@ -165,7 +165,6 @@ function mapDbLessonToType(row: any): GrammarLesson {
     explanation: row.explanation,
     examples: row.examples || [],
     relatedWordIds: row.related_word_ids || [],
-    difficulty: row.difficulty,
     prerequisites: row.prerequisites || []
   }
 }

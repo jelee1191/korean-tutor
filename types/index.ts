@@ -45,7 +45,6 @@ export interface GrammarLesson {
   explanation: string           // Full grammar explanation (markdown supported)
   examples: GrammarExample[]    // Example sentences
   relatedWordIds: string[]      // Links to vocabulary (e.g., ['ch1-014', 'ch1-015'])
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
   prerequisites?: string[]      // IDs of lessons that should come first
 }
 

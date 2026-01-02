@@ -34,15 +34,6 @@ export default function LessonView({ lesson, isCompleted, onStartExercises }: Le
         <h1 className="text-4xl font-black text-white mb-3">{lesson.title}</h1>
         <p className="text-2xl font-bold text-white/90 mb-4">{lesson.titleKorean}</p>
         <p className="text-lg text-white/80">{lesson.description}</p>
-        <div className="flex gap-2 mt-4">
-          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-            lesson.difficulty === 'beginner' ? 'bg-green-500/20 text-white' :
-            lesson.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-white' :
-            'bg-red-500/20 text-white'
-          }`}>
-            {lesson.difficulty.charAt(0).toUpperCase() + lesson.difficulty.slice(1)}
-          </span>
-        </div>
       </div>
 
       {/* Lesson Content */}
