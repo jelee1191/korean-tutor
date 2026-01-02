@@ -318,9 +318,11 @@ This ensures:
 
 **Grammar Lessons**: 6 lessons (Chapters 1-2) ✅
 - Chapter 1: Topic Particles (은/는), Copula (이다), Question Words
-- Chapter 2: Native vs Sino-Korean Numbers, Counter Words
-- **Features**: Full SRS tracking, 3 exercise types, mobile-optimized UI
-- **Remaining**: Chapters 3-20 need grammar lessons
+- Chapter 2: Native vs Sino-Korean Numbers, Counter Words, Telling Time
+- **Total Exercises**: 72 (12 per lesson)
+- **Features**: Full SRS tracking, 3 exercise types, auto-completion, mobile-optimized UI
+- **Database**: All content in Supabase, fetched at build time
+- **Remaining**: Chapters 3-20 need grammar lessons (14 chapters, ~168 exercises)
 
 ## Pedagogical Approach (Research-Backed)
 
@@ -339,13 +341,14 @@ The app implements evidence-based language learning methods:
 7. **Manual Progression**: "Next" button advancement instead of auto-advance
 
 ### Planned Features 📋
-1. **Supabase Integration for Grammar**: Sync grammar progress across devices
-2. **More Grammar Lessons**: Add lessons for Chapters 3-20
+1. **Supabase Integration for Grammar**: Sync grammar progress across devices (currently localStorage)
+2. **More Grammar Lessons**: Add lessons for Chapters 3-20 (14 chapters, ~168 exercises)
 3. **More Vocabulary**: Complete Chapters 5-20 (800 more words)
 4. **Bidirectional Practice**: English→Korean for production, not just recognition
 5. **Typing Practice**: Free-form Korean answers with fuzzy matching
 6. **Gamification**: Daily streaks, XP/levels, achievement badges
 7. **Pattern Recognition**: Common sentence structures and particle usage
+8. **Mobile App**: Consider React Native or PWA for offline access
 
 ### Cost Considerations
 - **Free tier**: Web Speech API audio, fuzzy string matching, all current features
@@ -392,43 +395,79 @@ The app implements evidence-based language learning methods:
 
 ### Recent Changes (2026-01-02)
 
-**Grammar Lesson System Implemented** (Latest):
-- Added comprehensive grammar education feature with full SRS
-- Created 6 grammar lessons for Chapters 1-2 with 20+ exercises
-- Implemented 3 exercise types:
-  - Multiple choice: 4-option questions with explanations
-  - Fill-in-blank: Korean input with fuzzy matching
-  - Sentence building: Word arrangement with shuffled order and distractor words
-- Mobile-optimized UI for iPhone 17 Pro (compact spacing, responsive text sizes)
-- Manual "Next" button advancement (no auto-advance)
-- Grammar hub, lesson pages, practice sessions, and SRS review routes
+**Major Migration to Supabase Database Architecture** (Latest):
+- **Complete database migration**: All content now stored in Supabase PostgreSQL
+- **Static generation architecture**: Pages fetch data at build time for instant loading
+- **Expanded grammar lessons**: 6 lessons with detailed, research-backed explanations
+- **72 exercises total**: 12 exercises per lesson (multiple choice, fill-in-blank, sentence building)
+- **New lesson added**: "Telling Time in Korean" (gram-02-03) with comprehensive explanations
+- **UX improvements**: Auto-complete lessons after finishing exercises, removed manual completion button
+- **Fixed bugs**: Practice page now handles missing word IDs gracefully
+- **Next.js 15+ compatibility**: Updated to async params pattern
+
+**Architecture Changes:**
+- All vocabulary and grammar content now in Supabase database
+- Server/Client component separation for optimal performance
+- Build-time data fetching with zero runtime database queries for content
+- Legacy `data/*.ts` files now only used for seeding database
+- New seed script for easy content management: `npx tsx scripts/seed-database.ts`
+
+**Grammar Lesson Improvements:**
+Each lesson now includes:
+- Detailed markdown explanations (5-10x more content)
+- Multiple example sentences with word-by-word breakdowns
+- Audio pronunciation integration
+- 12 progressive exercises (difficulty 1-3)
+- Auto-completion when all exercises finished
+
+**Lessons:**
+1. Topic Particles (은/는) - Expanded with topic vs subject explanation
+2. The Copula (이다) - Added politeness levels and common patterns
+3. Question Words - Comprehensive guide to interrogatives
+4. Native vs Sino-Korean Numbers - Detailed usage rules and memory tricks
+5. Counter Words - Complete guide to classifiers with number changes
+6. Telling Time (NEW) - Full guide to time expressions with AM/PM
 
 **Files Created:**
-- `data/grammar.ts` - Grammar lessons and exercises data
-- `lib/grammarStorage.ts` - localStorage for grammar progress
-- `lib/useGrammarProgress.ts` - React hook for grammar progress
-- `components/grammar/LessonView.tsx` - Lesson display component
-- `components/grammar/ExerciseContainer.tsx` - Exercise session manager
-- `components/grammar/exercises/MultipleChoice.tsx`
-- `components/grammar/exercises/FillInBlank.tsx`
-- `components/grammar/exercises/SentenceBuilder.tsx`
-- `app/grammar/page.tsx` - Grammar hub
-- `app/grammar/[lessonId]/page.tsx` - Individual lesson page
-- `app/grammar/[lessonId]/practice/page.tsx` - Exercise practice
-- `app/grammar/review/page.tsx` - SRS review session
+- `lib/supabaseContent.ts` - Server-side data fetching layer
+- `scripts/seed-database.ts` - Database seeding script
+- `supabase-schema-content.sql` - Database schema for content tables
+- `data/grammar-backup.ts` - Backup of original compact lessons
+- `data/grammar-expanded.ts` - Expanded lesson source (before migration)
+- `app/*/[Client].tsx` - Client components for all pages (server/client split)
 
 **Files Modified:**
-- `types/index.ts` - Added grammar lesson and exercise interfaces
-- `app/layout.tsx` - Added "Grammar" navigation link, removed subtitle
-- `app/page.tsx` - Added grammar stats card, removed subtitle
+- `app/grammar/[lessonId]/page.tsx` - Updated to async params, fetch from Supabase
+- `app/grammar/[lessonId]/practice/page.tsx` - Updated to async params
+- `app/grammar/review/page.tsx` - Split into server/client components
+- `app/practice/page.tsx` - Fixed word ID validation
+- `components/grammar/LessonView.tsx` - Removed manual completion button
+- `tsconfig.json` - Excluded scripts folder from build
+- `data/grammar.ts` - Expanded to 1,890 lines with comprehensive content
 
-**Fixed GitHub Repository Structure** (Earlier):
-- Resolved duplicate file structure issue
-- Added missing files for Vercel build
-- Removed nested subdirectory
+**Database Tables:**
+- `chapters` - Chapter metadata
+- `vocabulary` - All vocabulary words
+- `grammar_lessons` - Lessons with JSONB examples
+- `grammar_exercises` - Exercises with JSONB data
+
+**UX Improvements:**
+- Lessons auto-complete when all exercises are done (no manual button)
+- Practice page filters out invalid localStorage word IDs
+- Cleaner lesson pages with single "Start Exercises" button
+- Button changes to "Practice Again" after lesson completion
+- Better error handling throughout
+
+**Technical Improvements:**
+- Zero runtime database queries for content (all fetched at build time)
+- Static pages deployed to CDN for <50ms latency
+- Content editable directly in Supabase database
+- Trigger rebuild to update content in production
+- Proper TypeScript types for all database entities
 
 ### Next Steps
-- Add Supabase integration for grammar progress (sync across devices)
-- Create grammar lessons for Chapters 3-20 (14 more chapters)
+- Add Supabase integration for grammar progress (currently localStorage only)
+- Create grammar lessons for Chapters 3-20 (14 more chapters, 168+ exercises)
 - Add vocabulary for Chapters 5-20 (800 more words)
-- Consider chapter-integrated learning flow (/learn routes)
+- Consider implementing bidirectional practice (English→Korean)
+- Add gamification features (streaks, XP, achievements)
