@@ -43,28 +43,6 @@ export default function GrammarClient({ lessons }: GrammarClientProps) {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
-            <div className="text-4xl font-black text-indigo-600 mb-2">
-              {stats.lessonsCompleted}
-            </div>
-            <div className="text-gray-600">Lessons Completed</div>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
-            <div className="text-4xl font-black text-purple-600 mb-2">
-              {stats.masteredExercises}
-            </div>
-            <div className="text-gray-600">Exercises Mastered</div>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
-            <div className="text-4xl font-black text-green-600 mb-2">
-              {stats.accuracy}%
-            </div>
-            <div className="text-gray-600">Accuracy</div>
-          </div>
-        </div>
-
         {/* Due for Review */}
         {stats.dueForReview > 0 && (
           <Link

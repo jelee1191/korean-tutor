@@ -1,13 +1,12 @@
-import { getAllVocabulary } from '@/lib/supabaseContent'
-import DashboardClient from './DashboardClient'
+import { getAllGrammarLessons } from '@/lib/supabaseContent'
+import GrammarClient from './grammar/GrammarClient'
 
-export default async function Dashboard() {
-  // Fetch vocabulary count at build time
-  const vocabulary = await getAllVocabulary()
-  const totalVocabulary = vocabulary.length
+export default async function HomePage() {
+  // Fetch lessons at build time
+  const lessons = await getAllGrammarLessons()
 
   // Pass data to client component
-  return <DashboardClient totalVocabulary={totalVocabulary} />
+  return <GrammarClient lessons={lessons} />
 }
 
 // Force static generation
