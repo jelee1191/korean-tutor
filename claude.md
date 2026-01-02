@@ -218,3 +218,43 @@ The app implements evidence-based language learning methods:
 - **State**: React hooks (no external state library)
 - **Client Storage**: localStorage (fallback)
 - **Audio**: Web Speech API (browser built-in, free)
+
+## Deployment
+
+### Repository Structure
+- **GitHub Repository**: https://github.com/jelee1191/korean-tutor
+- **Project Root**: All files are at the repository root level (not in a subdirectory)
+- **Deployment Platform**: Vercel
+
+### Important Notes
+- The git repository is located at `/Users/jonathanlee/Documents/Projects/Korean-tutor/`
+- All development work should be done from this root directory
+- Files like `package.json`, `next.config.ts`, and source code are at the root level
+- Previous nested `korean-tutor/` subdirectory has been removed to fix Vercel build issues
+
+### Recent Changes (2026-01-02)
+**Fixed GitHub Repository Structure:**
+- Resolved duplicate file structure issue where files existed both at root and in `korean-tutor/` subdirectory
+- Added missing files that were causing Vercel build failures:
+  - `lib/audio.ts` - Web Speech API implementation for Korean pronunciation
+  - `lib/stringMatching.ts` - Fuzzy matching utilities for answer validation
+  - `claude.md` - Project documentation
+- Removed nested `korean-tutor/` subdirectory completely
+- Repository now has clean structure with all files at root level for proper Vercel deployment
+
+**Commits Made:**
+1. Initial commit with Korean vocabulary app and SRS system
+2. Added missing files for Vercel build (audio.ts, stringMatching.ts, claude.md)
+3. Removed duplicate korean-tutor subdirectory
+
+**Current Status:**
+- ✅ All files properly structured at repository root
+- ✅ Git repository synced with GitHub
+- ✅ Ready for Vercel deployment
+- ✅ No duplicate files or subdirectories
+
+### Next Steps
+- Verify Vercel build completes successfully
+- Continue development from root directory
+- Add remaining vocabulary chapters (5-20)
+- Implement planned features (typing practice, gamification, etc.)
